@@ -1,270 +1,355 @@
-// ===============================
-// ELEMENTS
-// ===============================
-
-const envelope = document.getElementById("envelope");
-const openBtn = document.getElementById("openBtn");
+/* =========================
+   ELEMENTS
+========================= */
 
 const openingScreen =
-  document.getElementById("openingScreen");
+    document.getElementById("openingScreen");
 
 const proposal =
-  document.getElementById("proposal");
+    document.getElementById("proposal");
+
+const envelope =
+    document.getElementById("envelope");
+
+const openBtn =
+    document.getElementById("openBtn");
 
 const yesBtn =
-  document.getElementById("yesBtn");
+    document.getElementById("yesBtn");
 
 const noBtn =
-  document.getElementById("noBtn");
+    document.getElementById("noBtn");
 
 const successScreen =
-  document.getElementById("successScreen");
-
-const closeSuccess =
-  document.getElementById("closeSuccess");
+    document.getElementById("successScreen");
 
 const musicBtn =
-  document.getElementById("musicBtn");
+    document.getElementById("musicBtn");
 
 const bgMusic =
-  document.getElementById("bgMusic");
-
-
-// ===============================
-// OPEN LETTER
-// ===============================
-
-openBtn.addEventListener("click", () => {
-
-  envelope.classList.add("open");
-
-  openBtn.innerHTML = "Opening... 💕";
-
-  setTimeout(() => {
-
-    openingScreen.style.display = "none";
-
-    proposal.classList.add("show");
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-
-  }, 1200);
-
-});
-
-
-// Also open when clicking envelope
-
-envelope.addEventListener("click", () => {
-
-  if (!envelope.classList.contains("open")) {
-
-    envelope.classList.add("open");
-
-    openBtn.innerHTML = "Opening... 💕";
-
-    setTimeout(() => {
-
-      openingScreen.style.display = "none";
-
-      proposal.classList.add("show");
-
-    }, 1200);
-
-  }
-
-});
-
-
-// ===============================
-// YES BUTTON
-// ===============================
-
-yesBtn.addEventListener("click", () => {
-
-  successScreen.classList.add("show");
-
-  createCelebration();
-
-});
-
-
-// ===============================
-// NO BUTTON
-// ===============================
-
-function moveNoButton() {
-
-  const maxX = window.innerWidth - 160;
-  const maxY = window.innerHeight - 100;
-
-  const x = Math.random() * maxX - maxX / 2;
-  const y = Math.random() * maxY - maxY / 2;
-
-  noBtn.style.position = "fixed";
-
-  noBtn.style.left = "50%";
-  noBtn.style.top = "50%";
-
-  noBtn.style.transform =
-    `translate(calc(-50% + ${x}px),
-               calc(-50% + ${y}px))`;
-}
-
-
-// Desktop
-
-noBtn.addEventListener("mouseenter", moveNoButton);
-
-
-// Mobile
-
-noBtn.addEventListener("touchstart", (event) => {
-
-  event.preventDefault();
-
-  moveNoButton();
-
-});
-
-
-// ===============================
-// SUCCESS CLOSE
-// ===============================
-
-closeSuccess.addEventListener("click", () => {
-
-  successScreen.classList.remove("show");
-
-});
-
-
-// ===============================
-// FLOATING HEARTS
-// ===============================
+    document.getElementById("bgMusic");
 
 const heartsContainer =
-  document.querySelector(".hearts");
-
-function createHeart() {
-
-  const heart =
-    document.createElement("div");
-
-  heart.className = "heart";
-
-  const hearts = [
-    "❤️",
-    "💕",
-    "💗",
-    "💖",
-    "💘",
-    "💓"
-  ];
-
-  heart.innerHTML =
-    hearts[Math.floor(Math.random() * hearts.length)];
-
-  heart.style.left =
-    Math.random() * 100 + "%";
-
-  heart.style.fontSize =
-    12 + Math.random() * 25 + "px";
-
-  heart.style.animationDuration =
-    5 + Math.random() * 7 + "s";
-
-  heartsContainer.appendChild(heart);
-
-  setTimeout(() => {
-    heart.remove();
-  }, 13000);
-}
+    document.getElementById("heartsContainer");
 
 
-// Create hearts continuously
-
-setInterval(createHeart, 600);
-
-
-// ===============================
-// CELEBRATION
-// ===============================
-
-function createCelebration() {
-
-  for (let i = 0; i < 50; i++) {
-
-    setTimeout(() => {
-
-      const heart =
-        document.createElement("div");
-
-      heart.className = "heart";
-
-      heart.innerHTML =
-        ["❤️", "💖", "💕", "💍", "✨"]
-        [Math.floor(Math.random() * 5)];
-
-      heart.style.left =
-        Math.random() * 100 + "%";
-
-      heart.style.fontSize =
-        15 + Math.random() * 30 + "px";
-
-      heart.style.animationDuration =
-        3 + Math.random() * 4 + "s";
-
-      heartsContainer.appendChild(heart);
-
-      setTimeout(() => {
-        heart.remove();
-      }, 7000);
-
-    }, i * 80);
-
-  }
-
-}
-
-
-// ===============================
-// MUSIC
-// ===============================
+/* =========================
+   MUSIC
+========================= */
 
 let musicPlaying = false;
 
-musicBtn.addEventListener("click", () => {
 
-  if (!musicPlaying) {
+async function playMusic() {
 
-    bgMusic.play()
-      .then(() => {
+    try {
+
+        bgMusic.volume = 0.7;
+
+        await bgMusic.play();
 
         musicPlaying = true;
 
         musicBtn.innerHTML = "🔊";
 
-      })
-      .catch(() => {
+        console.log("Music playing successfully");
 
-        alert(
-          "Add a file named music.mp3 to the project folder first ❤️"
+    } catch (error) {
+
+        console.error(
+            "Music could not play:",
+            error
         );
 
-      });
+        musicPlaying = false;
 
-  } else {
+        musicBtn.innerHTML = "🎵";
 
-    bgMusic.pause();
+    }
+}
 
-    musicPlaying = false;
 
-    musicBtn.innerHTML = "🎵";
+/* =========================
+   MUSIC BUTTON
+========================= */
 
-  }
+musicBtn.addEventListener(
+    "click",
+    async () => {
 
-});
+        if (musicPlaying) {
+
+            bgMusic.pause();
+
+            musicPlaying = false;
+
+            musicBtn.innerHTML = "🎵";
+
+        } else {
+
+            await playMusic();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   OPEN ENVELOPE
+========================= */
+
+function openLetter() {
+
+    /*
+       IMPORTANT:
+       playMusic() is called here because
+       this function runs after the user's
+       button click.
+    */
+
+    playMusic();
+
+
+    envelope.classList.add("open");
+
+
+    openBtn.innerHTML =
+        "Opening... 💕";
+
+
+    openBtn.disabled = true;
+
+
+    setTimeout(() => {
+
+        openingScreen.style.display =
+            "none";
+
+        proposal.classList.add("show");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }, 1200);
+
+}
+
+
+openBtn.addEventListener(
+    "click",
+    openLetter
+);
+
+
+/* =========================
+   YES BUTTON
+========================= */
+
+yesBtn.addEventListener(
+    "click",
+    () => {
+
+        successScreen.classList.add("show");
+
+        createCelebration();
+
+    }
+);
+
+
+/* =========================
+   NO BUTTON
+========================= */
+
+function moveNoButton() {
+
+    const buttonWidth =
+        noBtn.offsetWidth;
+
+    const buttonHeight =
+        noBtn.offsetHeight;
+
+
+    const maxX =
+        window.innerWidth -
+        buttonWidth -
+        30;
+
+
+    const maxY =
+        window.innerHeight -
+        buttonHeight -
+        30;
+
+
+    const randomX =
+        Math.max(
+            20,
+            Math.random() * maxX
+        );
+
+
+    const randomY =
+        Math.max(
+            20,
+            Math.random() * maxY
+        );
+
+
+    noBtn.style.position =
+        "fixed";
+
+
+    noBtn.style.left =
+        `${randomX}px`;
+
+
+    noBtn.style.top =
+        `${randomY}px`;
+
+
+    noBtn.style.zIndex =
+        "9999";
+}
+
+
+/*
+   Desktop
+*/
+
+noBtn.addEventListener(
+    "mouseenter",
+    moveNoButton
+);
+
+
+/*
+   Mobile
+*/
+
+noBtn.addEventListener(
+    "touchstart",
+    (event) => {
+
+        event.preventDefault();
+
+        moveNoButton();
+
+    }
+);
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+function createHeart() {
+
+    const heart =
+        document.createElement("div");
+
+
+    heart.classList.add(
+        "floating-heart"
+    );
+
+
+    const hearts = [
+        "❤️",
+        "💕",
+        "💗",
+        "💖",
+        "💘"
+    ];
+
+
+    heart.innerHTML =
+        hearts[
+            Math.floor(
+                Math.random() *
+                hearts.length
+            )
+        ];
+
+
+    heart.style.left =
+        Math.random() * 100 + "%";
+
+
+    heart.style.fontSize =
+        `${15 + Math.random() * 25}px`;
+
+
+    heart.style.animationDuration =
+        `${4 + Math.random() * 4}s`;
+
+
+    heartsContainer.appendChild(
+        heart
+    );
+
+
+    setTimeout(() => {
+
+        heart.remove();
+
+    }, 8000);
+
+}
+
+
+/*
+   Create hearts continuously
+*/
+
+setInterval(
+    createHeart,
+    700
+);
+
+
+/* =========================
+   YES CELEBRATION
+========================= */
+
+function createCelebration() {
+
+    for (
+        let i = 0;
+        i < 40;
+        i++
+    ) {
+
+        setTimeout(
+            createHeart,
+            i * 80
+        );
+
+    }
+
+}
+
+
+/* =========================
+   KEYBOARD SUPPORT
+========================= */
+
+document.addEventListener(
+    "keydown",
+    (event) => {
+
+        if (
+            event.key === "Enter" &&
+            !openBtn.disabled &&
+            openingScreen.style.display !== "none"
+        ) {
+
+            openLetter();
+
+        }
+
+    }
+);

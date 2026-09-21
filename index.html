@@ -1,157 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
 
-  <title>For Ankita ❤️</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-  <link rel="stylesheet" href="style.css" />
+    <title>For Ankita ❤️</title>
+
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
-  <!-- Floating Hearts -->
-  <div class="hearts"></div>
+    <!-- ================= MUSIC ================= -->
 
-  <!-- Music -->
-  <button class="music-btn" id="musicBtn">🎵</button>
+    <audio id="bgMusic" loop preload="auto">
+        <source src="./music/music.mp3" type="audio/mpeg">
+    </audio>
 
-  <!-- Opening Screen -->
-  <section class="opening-screen" id="openingScreen">
+    <button id="musicBtn" class="music-btn">
+        🎵
+    </button>
 
-    <div class="intro">
-      <p class="small-text">A little something for you...</p>
 
-      <h1>Hey, Ankita ❤️</h1>
+    <!-- ================= FLOATING HEARTS ================= -->
 
-      <p class="hint">I have something important to ask you...</p>
+    <div id="heartsContainer"></div>
 
-      <div class="envelope-container" id="envelope">
 
-        <div class="envelope">
-          <div class="envelope-back"></div>
+    <!-- ================= OPENING SCREEN ================= -->
 
-          <div class="letter-preview">
-            <span>💌</span>
-            <p>For You</p>
-          </div>
+    <section id="openingScreen" class="opening-screen">
 
-          <div class="envelope-front"></div>
-          <div class="envelope-flap"></div>
+        <div class="opening-content">
 
-          <div class="heart-seal">♥</div>
+            <p class="small-text">
+                A little something for you...
+            </p>
+
+            <h1>
+                Hey, Ankita ❤️
+            </h1>
+
+            <p class="opening-message">
+                I have something very special to ask you...
+            </p>
+
+
+            <!-- ENVELOPE -->
+
+            <div id="envelope" class="envelope">
+
+                <div class="envelope-back"></div>
+
+                <div class="envelope-paper">
+                    <span>❤️</span>
+                </div>
+
+                <div class="envelope-flap"></div>
+
+                <div class="envelope-front"></div>
+
+            </div>
+
+
+            <button id="openBtn" class="open-btn">
+                Click to Open 💌
+            </button>
+
         </div>
 
-      </div>
-
-      <button class="open-btn" id="openBtn">
-        Click to Open 💌
-      </button>
-
-    </div>
-  </section>
+    </section>
 
 
-  <!-- Proposal Section -->
-  <main class="proposal" id="proposal">
+    <!-- ================= PROPOSAL SCREEN ================= -->
 
-    <div class="proposal-card">
+    <main id="proposal" class="proposal">
 
-      <div class="top-heart">❤️</div>
+        <div class="proposal-container">
 
-      <p class="dear">Dear Ankita,</p>
+            <div class="proposal-top-heart">
+                ❤️
+            </div>
 
-      <h2>
-        Will You Be<br />
-        <span>My Forever?</span>
-      </h2>
+            <p class="question-small">
+                Ankita, my love...
+            </p>
 
-      <div class="divider">
-        <span>♥</span>
-      </div>
+            <h1>
+                Will You Be<br>
+                <span>My Forever?</span>
+            </h1>
 
-      <p class="message">
-        I don't know exactly what the future holds,
-        but I know one thing...
-      </p>
+            <div class="ring">
+                💍
+            </div>
 
-      <p class="message highlight">
-        I want to spend it with you. ❤️
-      </p>
+            <p class="proposal-text">
+                Life feels more beautiful with you in it.
+                I don't want just today with you...
+                <br>
+                I want every tomorrow. ❤️
+            </p>
 
-      <p class="message">
-        You are the person who makes my ordinary days
-        feel special, my bad days feel easier,
-        and my happiest moments even happier.
-      </p>
-
-      <p class="message">
-        So today, I have just one question...
-      </p>
-
-      <div class="big-question">
-        💍<br />
-        <span>Will you marry me?</span>
-      </div>
-
-      <div class="buttons">
-
-        <button class="yes-btn" id="yesBtn">
-          YES! ❤️
-        </button>
-
-        <button class="no-btn" id="noBtn">
-          No 😭
-        </button>
-
-      </div>
-
-      <p class="signature">
-        Forever yours,<br />
-        <strong>Prasun ❤️</strong>
-      </p>
-
-    </div>
-
-  </main>
+            <h2>
+                Will you marry me?
+            </h2>
 
 
-  <!-- Success Popup -->
-  <div class="success-screen" id="successScreen">
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <button id="yesBtn" class="yes-btn">
+                    YES! ❤️
+                </button>
+
+                <button id="noBtn" class="no-btn">
+                    No 😢
+                </button>
+
+            </div>
+
+            <p class="hint">
+                Choose wisely... 😏❤️
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= SUCCESS SCREEN ================= -->
+
+    <section id="successScreen" class="success-screen">
 
     <div class="success-card">
 
-      <div class="ring">💍</div>
+        <div class="success-hearts">
+            ❤️ 💕 ❤️
+        </div>
 
-      <h2>She Said YES! ❤️</h2>
+        <h1>She Said YES! ❤️</h1>
 
-      <p>
-        Ankita, you just made me the happiest person
-        in the world. 🥹❤️
-      </p>
+        <p class="love-text">
+            Our forever starts now... 💕
+        </p>
 
-      <div class="love-text">
-        Prasun ❤️ Ankita
-      </div>
+        <div class="couple-photos">
 
-      <button id="closeSuccess">
-        Our Forever Begins ✨
-      </button>
+            <div class="photo-box">
+                <img
+                    src="./images/prasun.jpeg"
+                    alt="Prasun"
+                >
+
+                <span>Prasun ❤️</span>
+            </div>
+
+            <div class="heart-between">
+                ❤️
+            </div>
+
+            <div class="photo-box">
+                <img
+                    src="./images/Ankita.jpeg"
+                    alt="Ankita"
+                >
+
+                <span>Ankita ❤️</span>
+            </div>
+
+        </div>
+
+        <h2>
+            Prasun ❤️ Ankita
+        </h2>
+
+        <p class="forever-text">
+            Together, forever & always 💍✨
+        </p>
 
     </div>
 
-  </div>
+</section>
 
-
-  <!-- Optional Background Music -->
-  <!-- Replace music.mp3 with your own romantic song -->
-  <audio id="bgMusic" loop>
-    <source src="music.mp3" type="audio/mpeg" />
-  </audio>
-
-
-  <script src="script.js"></script>
+    <script src="./script.js"></script>
 
 </body>
 </html>
